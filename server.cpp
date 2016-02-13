@@ -8,28 +8,35 @@
 #include <netinet/ip.h> 
 #include <arpa/inet.h>
 
+//For Vpack objects
+#include <velocypack/vpack.h>
+
 using namespace std;
 
-// void reflect(int x)
-// {
-//     int n;
-//     int m;
-//     char data[100];
-//     cout<<"Entered reflect function"<<endl;
+struct vstream {
+    uint32_t length;
+    uint32_t chunkx;
+    uint64_t messageId;
+    std::vector<arangodb::velocypack::Builder> vpack;
+};
 
-//     n=read(x,data, 100);
-//     cout<<"Client sent "<<n<<endl;
+struct uint31_t {
+    int x: 31;
+};
 
-//     if(n>0)
-//     {
-//         while(n>0)
-//         {
-//             m=write(x,data,n);
-//             n=n-m;
-//         }
-//     cout<<"Successfully echoed back to client"<<endl;
-//     }
-// }
+struct uint1_t {
+    int x: 1;
+};
+
+uint31_t extract_31t(vstream v) {
+    uint31_t t31 = v.chunkx >> 1;
+    return t31;
+}
+
+uint1_t extract_1t(vstream v) {
+    uint1_t t1 = v.chunkx & 0x1;
+    return uint1_t;
+}
 
 int main()
 {
@@ -40,10 +47,7 @@ int main()
     inet_aton("127.0.0.1", &(serv.sin_addr));
 
     int servfd=socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    // int x;
     bind(servfd, (sockaddr*)(&serv), sizeof(serv));
-
-    // cout<<"Bind returned"<<x<<endl; //this displays x as 0
 
     listen(servfd, 5);
     sockaddr cli;
@@ -54,12 +58,5 @@ int main()
     {
         if( (connfd=accept(servfd, &cli, &siz)) >=0 )
             continue;
-        //      id=fork();
-
-        // if(id==0)
-        //      reflect(connfd);
-
-        // else 
-             // continue;
     }
 }

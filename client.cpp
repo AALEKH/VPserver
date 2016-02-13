@@ -8,7 +8,18 @@
 // #include <netdb.h> 
 #include <arpa/inet.h>
 #include <netinet/ip.h> 
+
+//For Vpack objects
+#include <velocypack/vpack.h>
+
 using namespace std;
+
+struct vstream {
+    uint32_t length;
+    uint32_t chunkx;
+    uint64_t messageId;
+    std::vector<arangodb::velocypack::Builder> vpack;
+};
 
 int main()
 {
