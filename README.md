@@ -2,6 +2,7 @@
 VelocyPack Server
 
 ## VelocyStream Strcuture:
+```
 |-------------------------------------------|
 | length | chunk | isFirstChunk | messageID | 
 |-------------------------------------------|
@@ -12,5 +13,6 @@ VelocyPack Server
 |                 .                         |
 |               Vpack-n                     |
 ---------------------------------------------
+```
 
 Thanks for Initial Help (LinuxHowTo's): http://www.linuxhowtos.org/C_C++/socket.htm 
